@@ -1,5 +1,6 @@
 package com.afs.unittest;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ExpenseServiceTest {
@@ -15,10 +16,15 @@ class ExpenseServiceTest {
     @Test
     void should_return_expense_type_A_when_getExpenseCodeByProject_given_project_is_external_and_name_is_project_A() {
         // given
+        Project externalProject = new Project(ProjectType.EXTERNAL, "Project A");
+        ProjectService projectService = new ProjectService();
+        ExpenseService expenseService = new ExpenseService(projectService);
 
         // when
+        ExpenseType expenseCodeByProject = expenseService.getExpenseCodeByProject(externalProject);
 
         // then
+        Assertions.assertEquals(ExpenseType.EXPENSE_TYPE_A, expenseCodeByProject);
     }
 
     @Test
