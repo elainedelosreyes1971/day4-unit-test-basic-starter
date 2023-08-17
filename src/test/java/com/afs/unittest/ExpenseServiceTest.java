@@ -30,10 +30,15 @@ class ExpenseServiceTest {
     @Test
     void should_return_expense_type_B_when_getExpenseCodeByProject_given_project_is_external_and_name_is_project_B() {
         // given
+        Project externalProject = new Project(ProjectType.EXTERNAL, "Project B");
+        ProjectService projectService = new ProjectService();
+        ExpenseService expenseService = new ExpenseService(projectService);
 
         // when
+        ExpenseType expenseCodeByProject = expenseService.getExpenseCodeByProject(externalProject);
 
         // then
+        Assertions.assertEquals(ExpenseType.EXPENSE_TYPE_B, expenseCodeByProject);
     }
 
     @Test
