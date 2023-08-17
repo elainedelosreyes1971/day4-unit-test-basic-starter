@@ -44,9 +44,14 @@ class ExpenseServiceTest {
     @Test
     void should_return_other_expense_type_when_getExpenseCodeByProject_given_project_is_external_and_has_other_name() {
         // given
+        Project externalProject = new Project(ProjectType.EXTERNAL, "Other Project");
+        ProjectService projectService = new ProjectService();
+        ExpenseService expenseService = new ExpenseService(projectService);
 
         // when
+        ExpenseType expenseCodeByProject = expenseService.getExpenseCodeByProject(externalProject);
 
         // then
+        Assertions.assertEquals(ExpenseType.OTHER_EXPENSE, expenseCodeByProject);
     }
 }
